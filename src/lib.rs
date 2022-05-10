@@ -5,6 +5,7 @@ use std::collections::HashMap;
 
 pub mod util;
 mod socket;
+#[macro_user]
 mod response;
 mod settings;
 mod static_files;
