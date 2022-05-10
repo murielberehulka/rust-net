@@ -6,7 +6,7 @@ use std::net::{Shutdown};
 use super::File;
 
 const MAX_PAYLOAD_LENGTH: usize = 128;
-const MAX_PAYLOADS: usize = 4;
+const MAX_PAYLOADS: usize = 5;
 
 const RES_200_0: &'static[u8] = b"HTTP/1.1 200 OK\r\nContent-Length: ";
 const RES_200_1: &'static[u8] = b"\r\n\r\n";
