@@ -7,6 +7,7 @@ macro_rules! get_body_utf8 {
         }
     };
 }
+pub(crate) use get_body_utf8;
 
 pub trait Response {
     fn get_body(&self) -> &[u8];
