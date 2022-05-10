@@ -25,6 +25,7 @@ impl FileType {
             [b'm',b'p',b'e',b'g'] => Self::Mpeg,
             [b'm',b'p',b'4'] => Self::Mp4,
             [b'i',b'c',b'o'] => Self::Ico,
+            [b't',b't',b'f'] => Self::Ttf,
             _ => Self::Unknown
         }
     }
@@ -45,6 +46,7 @@ impl FileType {
             FileType::Mpeg => "video/mpeg".as_bytes(),
             FileType::Mp4 => "video/mp4".as_bytes(),
             FileType::Ico => "image/x-icon".as_bytes(),
+            FileType::Ttf => "font/ttf".as_bytes(),
             FileType::Unknown => "unknown".as_bytes()
         }
     }
