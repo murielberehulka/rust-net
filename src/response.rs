@@ -1,3 +1,13 @@
+#[macro_export]
+macro_rules! get_body_utf8 {
+    ($res: expr, $socket: expr) => {
+        match str::from_utf8(res.get_body()) {
+            Ok(v) => v,
+            Err(e) => return on_error_500(socket, e)
+        }
+    };
+}
+
 pub trait Response {
     fn get_body(&self) -> &[u8];
     fn get_body_formated(&self) -> Vec<&[u8]>;
