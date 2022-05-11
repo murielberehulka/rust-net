@@ -4,6 +4,16 @@ pub const U8_O: u8 = 'O' as u8;
 pub const U8_SPACE: u8 = ' ' as u8;
 pub const INDEX: &'static[u8] = &['i' as u8,'n' as u8,'d' as u8,'e' as u8,'x' as u8,'.' as u8,'h' as u8,'t' as u8,'m' as u8,'l' as u8];
 
+#[macro_export]
+macro_rules! vec_u8_to_str {
+    ($res: expr, $socket: expr) => {
+        match str::from_utf8($res) {
+            Ok(v) => v,
+            Err(e) => return on_error_500($socket, e)
+        }
+    };
+}
+
 pub fn read_data_until_space(data: &Vec<u8>, start: usize) -> &[u8] {
     let mut end = start;
     let max = data.len();

@@ -1,13 +1,12 @@
 #[macro_export]
 macro_rules! get_body_utf8 {
     ($res: expr, $socket: expr) => {
-        match str::from_utf8(res.get_body()) {
+        match str::from_utf8($res.get_body()) {
             Ok(v) => v,
-            Err(e) => return on_error_500(socket, e)
+            Err(e) => return $socket.send_500(e)
         }
-    };
+    }
 }
-pub(crate) use get_body_utf8;
 
 pub trait Response {
     fn get_body(&self) -> &[u8];

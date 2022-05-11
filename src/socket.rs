@@ -33,7 +33,7 @@ pub trait Socket {
     fn send_200(&mut self, data: &[u8]);
     fn send_400(&mut self, data: &[u8]);
     fn send_404(&mut self);
-    fn send_500(&mut self, data: &[u8]);
+    fn send_500(&mut self, data: impl std::fmt::Display);
 }
 
 impl Socket for TcpStream {
@@ -86,7 +86,9 @@ impl Socket for TcpStream {
     fn send_404(&mut self) {
         if let Err(_) = self.write_all(RES_404) {};
     }
-    fn send_500(&mut self, data: &[u8]) {
+    fn send_500(&mut self, data: impl std::fmt::Display) {
+        let data = data.to_string();
+        let data = data.as_bytes();
         let mut send: Vec<u8> = Vec::with_capacity(RES_500_LENGTH + data.len());
         send.extend(RES_500_0);
         send.extend(data.len().to_string().as_bytes());
@@ -114,7 +116,7 @@ impl Sockets {
     pub fn remove(&mut self, poll: &mio::Poll, token: usize) {
         if let Some(socket) = self.0.get_mut(&token) {
             poll.registry().deregister(socket).unwrap();
-            socket.shutdown(Shutdown::Both).unwrap();
+            if let Err(_) = socket.shutdown(Shutdown::Both) {};
         }
         self.0.remove(&token);
     }
