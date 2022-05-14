@@ -9,7 +9,7 @@ macro_rules! vec_u8_to_str {
     ($res: expr, $socket: expr) => {
         match str::from_utf8($res) {
             Ok(v) => v,
-            Err(e) => return socket.send_500(e)
+            Err(e) => return $socket.send_500(e)
         }
     };
 }
