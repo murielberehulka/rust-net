@@ -1,13 +1,9 @@
-[lib]
-name = "rust_net"
-path = "src/lib.rs"
-
 [[examples]]
 name = "basic"
 path = "src/examples/basic.rs"
 
 [package]
-name = "rust_net"
+name = "rust-net"
 version = "0.1.0"
 authors = ["Muriel Berehulka <murielberehulka@gmail.com>"]
 edition = "2018"
