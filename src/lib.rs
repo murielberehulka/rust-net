@@ -14,7 +14,7 @@ pub use socket::*;
 pub use settings::*;
 pub use static_files::*;
 
-pub type RouteFunction<T> = fn(&mut T, &mut TcpStream, Vec<u8>);
+pub type RouteFunction<T> = fn(&mut T, &mut Socket, Vec<u8>);
 struct Routes<T> {
     get: HashMap<Vec<u8>, RouteFunction<T>>,
     post: HashMap<Vec<u8>, RouteFunction<T>>
@@ -35,7 +35,7 @@ impl<T> Server<T> {
                 IpAddr::V4(Ipv4Addr::new(settings.address[0], settings.address[1], settings.address[2], settings.address[3])), 
                 settings.port
             ),
-            clients: Sockets::new(),
+            clients: Sockets::new(settings.socket),
             static_files: match settings.static_files {
                 Some(static_files_settings) => 
                     Some(StaticFiles::new(static_files_settings.root_path, static_files_settings.enable_cache)),
