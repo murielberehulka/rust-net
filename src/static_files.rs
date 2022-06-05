@@ -3,7 +3,7 @@ use std::fs;
 use super::util::get_extension;
 
 pub enum FileType {
-    Html, Text, Css, Js, Pdf, Json, Zip, Gif, Jpeg, Png, Svg, Xml, Mpeg, Mp4, Ico, Ttf, Unknown
+    Html, Text, Css, Js, Pdf, Json, Zip, Gif, Jpeg, Png, Svg, Xml, Mpeg, Mp4, Ico, Ttf, Otf, Unknown
 }
 impl FileType {
     pub fn get(v: &[u8]) -> Self {
@@ -26,6 +26,7 @@ impl FileType {
             [b'm',b'p',b'4'] => Self::Mp4,
             [b'i',b'c',b'o'] => Self::Ico,
             [b't',b't',b'f'] => Self::Ttf,
+            [b'o',b't',b'f'] => Self::Otf,
             _ => Self::Unknown
         }
     }
@@ -46,7 +47,8 @@ impl FileType {
             FileType::Mpeg => "video/mpeg".as_bytes(),
             FileType::Mp4 => "video/mp4".as_bytes(),
             FileType::Ico => "image/x-icon".as_bytes(),
-            FileType::Ttf => "font/ttf".as_bytes(),
+            FileType::Ttf => "application/x-font-ttf".as_bytes(),
+            FileType::Otf => "application/x-font-opentype".as_bytes(),
             FileType::Unknown => "unknown".as_bytes()
         }
     }
